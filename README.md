@@ -6,31 +6,39 @@ In order to deploy application to the Kubernetes cluster, you need to run the fo
 
 
 #Configure Ingress
+
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.45.0/deploy/static/provider/cloud/deploy.yaml
 kubectl wait --namespace ingress-nginx --for=condition=ready pod --selector=app.kubernetes.io/component=controller --timeout=90s
 
 #Deploy Frontend pod and Service
+
 kubectl apply -f deployments\frontend-deployment.yml
 kubectl apply -f services\frontend-service.yml
 
 #Deploy booking pod and Service
+
 kubectl apply -f deployments\booking-deployment.yml
 call kubectl apply -f services\booking-service.yml
 
 #Deploy payment pod and Service
+
 call kubectl apply -f deployments\payment-deployment.yml
 call kubectl apply -f services\payment-service.yml
 
 #Deploy search pod and Service
+
 call kubectl apply -f deployments\search-deployment.yml
 call kubectl apply -f services\search-service.yml
 
 #Deploy Ingress controller for frontend and API 
+
 call kubectl apply -f ingress\frontend-ingress.yml
 call kubectl apply -f ingress\backend-ingress.yml
 
 #Get Services
+
 call kubectl get service
 
 #Get pods(To see if containers are running)
+
 call kubectl get pods -w
