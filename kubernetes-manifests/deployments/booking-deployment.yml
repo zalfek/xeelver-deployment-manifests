@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: booking
+  labels:
+    app: booking
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: booking
+  template:
+    metadata:
+      labels:
+        app: booking
+        tier: backend
+    spec:
+      containers:
+        - name: booking
+          image: marmiss/booking-service:1.0.0
+          ports:
+            - containerPort: 80
