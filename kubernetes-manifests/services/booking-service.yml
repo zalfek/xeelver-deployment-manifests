@@ -1,13 +1,22 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: booking-service
-spec:
-  selector:
+  labels:
     app: booking
-    tier: backend
+  name: booking
+  namespace: xeelver
+spec:
   ports:
     - protocol: TCP
       port: 80
       targetPort: 80
+  selector:
+    app: booking
   type: ClusterIP
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: booking
+  namespace: xeelver

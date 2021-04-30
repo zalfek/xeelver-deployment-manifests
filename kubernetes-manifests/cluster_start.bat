@@ -19,6 +19,9 @@ call kubectl apply -f services\search-service.yml
 call kubectl apply -f ingress\frontend-ingress.yml
 call kubectl apply -f ingress\backend-ingress.yml
 
+#Create Dashboard
+call kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml
+
 #Get Services
 call kubectl get service
 

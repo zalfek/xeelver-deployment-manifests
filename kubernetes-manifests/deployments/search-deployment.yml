@@ -4,6 +4,7 @@ metadata:
   name: search
   labels:
     app: search
+  namespace: xeelver
 spec:
   replicas: 3
   selector:
@@ -13,10 +14,13 @@ spec:
     metadata:
       labels:
         app: search
-        tier: backend
+        version: "1"
     spec:
+      serviceAccountName: search
       containers:
         - name: search
           image: marmiss/search-service:1.0.0
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
+              protocol: TCP

@@ -4,6 +4,7 @@ metadata:
   name: payment
   labels:
     app: payment
+  namespace: xeelver
 spec:
   replicas: 3
   selector:
@@ -13,10 +14,13 @@ spec:
     metadata:
       labels:
         app: payment
-        tier: backend
+        version: "1"
     spec:
+      serviceAccountName: payment
       containers:
         - name: payment
           image: marmiss/payment-service:1.0.0
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
+              protocol: TCP

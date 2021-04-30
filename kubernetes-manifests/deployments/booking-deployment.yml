@@ -4,6 +4,7 @@ metadata:
   name: booking
   labels:
     app: booking
+  namespace: xeelver
 spec:
   replicas: 3
   selector:
@@ -13,10 +14,13 @@ spec:
     metadata:
       labels:
         app: booking
-        tier: backend
+        version: "1"
     spec:
+      serviceAccountName: booking
       containers:
         - name: booking
           image: marmiss/booking-service:1.0.0
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
+              protocol: TCP

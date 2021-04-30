@@ -1,0 +1,59 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: frontend-gateway
+  namespace: xeelver
+spec:
+  selector:
+    istio: ingressgateway # use Istio default gateway implementation
+  servers:
+    - port:
+        number: 80
+        name: http
+        protocol: HTTP
+      hosts:
+        - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: frontend-ingress
+  namespace: xeelver
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - frontend-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /api/booking
+    route:
+    - destination:
+        host: booking
+        port:
+          number: 80
+  - match:
+    - uri:
+        prefix: /api/payment
+    route:
+    - destination:
+        host: payment
+        port:
+          number: 80
+  - match:
+    - uri:
+        prefix: /api/search
+    route:
+    - destination:
+        host: search
+        port:
+          number: 80
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        host: frontend-server
+        port:
+          number: 80
