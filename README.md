@@ -8,9 +8,9 @@ In order to deploy application to the Kubernetes cluster, you need to run the fo
 
 minikube start
 
-#Install Istio
+#Install Istio(Including Egress)
 
-istoctl install
+istioctl install --set components.egressGateways[0].name=istio-egressgateway --set components.egressGateways[0].enabled=true
 
 #Create Namespace
 
@@ -29,7 +29,6 @@ kubectl wait --namespace ingress-nginx --for=condition=ready pod --selector=app.
 
 kubectl apply -f
 kubectl apply -f
-
 
 #Deploy Frontend pod and Service
 

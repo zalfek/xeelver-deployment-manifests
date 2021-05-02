@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: amadeus-egress
+  namespace: xeelver
+spec:
+  hosts:
+  - "test.api.amadeus.com"
+  ports:
+  - number: 80
+    protocol: HTTP
+    name: http
+  - number: 443
+    protocol: HTTPS
+    name: https
+  resolution: DNS

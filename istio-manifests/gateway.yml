@@ -27,7 +27,7 @@ spec:
   http:
   - match:
     - uri:
-        prefix: /api/booking
+        prefix: /api/v1/booking
     route:
     - destination:
         host: booking
@@ -35,7 +35,7 @@ spec:
           number: 80
   - match:
     - uri:
-        prefix: /api/payment
+        prefix: /api/v1/payment
     route:
     - destination:
         host: payment
@@ -43,7 +43,7 @@ spec:
           number: 80
   - match:
     - uri:
-        prefix: /api/search
+        prefix: /api/v1/search
     route:
     - destination:
         host: search

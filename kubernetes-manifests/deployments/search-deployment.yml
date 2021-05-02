@@ -18,9 +18,21 @@ spec:
     spec:
       serviceAccountName: search
       containers:
-        - name: search
-          image: marmiss/search-service:1.0.0
-          imagePullPolicy: IfNotPresent
-          ports:
-            - containerPort: 80
-              protocol: TCP
+      - name: search
+        image: marmiss/search-service:1.0.1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        env:
+        - name: AMADEUS_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: api-secret
+              key: key
+        - name: AMADEUS_API_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: api-secret
+              key: secret
+
