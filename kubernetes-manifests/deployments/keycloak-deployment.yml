@@ -1,12 +1,28 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: keycloak
+  namespace: keycloak
+  labels:
+    app: keycloak
+spec:
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: keycloak
+  type: LoadBalancer
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: keycloak
-  namespace: default
+  namespace: keycloak
   labels:
     app: keycloak
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: keycloak
@@ -22,7 +38,7 @@ spec:
             - name: KEYCLOAK_USER
               value: "xeelver_admin"
             - name: KEYCLOAK_PASSWORD
-              value: "xeelver_password"
+              value: "Iamgonnakickyorass!1"
             - name: PROXY_ADDRESS_FORWARDING
               value: "true"
           ports:
