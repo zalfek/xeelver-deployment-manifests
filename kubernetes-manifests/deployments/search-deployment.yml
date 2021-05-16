@@ -19,8 +19,8 @@ spec:
       serviceAccountName: search
       containers:
       - name: search
-        image: marmiss/search-service:1.0.1
-        imagePullPolicy: IfNotPresent
+        image: marmiss/search-service:1.0.3
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
           protocol: TCP
@@ -35,4 +35,8 @@ spec:
             secretKeyRef:
               name: api-secret
               key: secret
-
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: cache-secret
+              key: password

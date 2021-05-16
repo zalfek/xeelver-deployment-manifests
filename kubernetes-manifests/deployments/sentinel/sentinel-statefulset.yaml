@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: sentinel
+  namespace: xeelver
 spec:
   serviceName: sentinel
   replicas: 3
@@ -19,8 +20,9 @@ spec:
           command: [ "sh", "-c" ]
           args:
             - |
-              REDIS_PASSWORD=a-very-complex-password-here
-              nodes=redis-0.redis.redis.svc.cluster.local,redis-1.redis.redis.svc.cluster.local,redis-2.redis.redis.svc.cluster.local
+              REDIS_PASSWORD=Sdfdsmn867GJGHj824iuglSFHgjghjGHGFD343gjhjglzuz23fdsfsddfh
+              nodes=redis-0.redis.xeelver.svc.cluster.local,redis-1.redis.xeelver.svc.cluster.local,redis-2.redis.xeelver.svc.cluster.local
+
               for i in ${nodes//,/ }
               do
                   echo "finding master at $i"
@@ -34,6 +36,7 @@ spec:
                   fi
               done
               echo "sentinel monitor mymaster $MASTER 6379 2" >> /tmp/master
+
               echo "port 5000
               $(cat /tmp/master)
               sentinel down-after-milliseconds mymaster 5000
