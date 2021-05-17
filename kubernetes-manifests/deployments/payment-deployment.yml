@@ -19,8 +19,19 @@ spec:
       serviceAccountName: payment
       containers:
         - name: payment
-          image: marmiss/payment-service:1.0.0
+          image: marmiss/payment-service:1.0.1
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
               protocol: TCP
+            env:
+              - name: KLARNA_USERNAME
+                valueFrom:
+                  secretKeyRef:
+                    name: klarna-secret
+                    key: username
+              - name: KLARNA_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: klarna-secret
+                    key: password
