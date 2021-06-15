@@ -1,0 +1,10 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: external-mysql-db
+  namespace: keycloak
+spec:
+  type: ExternalName
+  externalName: xeelver.cnao2eqc78sa.eu-central-1.rds.amazonaws.com
+  ports:
+    - port: 3306
