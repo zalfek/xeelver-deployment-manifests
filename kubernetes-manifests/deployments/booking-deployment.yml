@@ -19,7 +19,7 @@ spec:
       serviceAccountName: booking
       containers:
         - name: booking
-          image: marmiss/booking-service:1.0.0
+          image: marmiss/booking-service:1.0.4
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80

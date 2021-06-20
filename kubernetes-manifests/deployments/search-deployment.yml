@@ -19,7 +19,7 @@ spec:
       serviceAccountName: search
       containers:
       - name: search
-        image: marmiss/search-service:1.0.8
+        image: marmiss/search-service:1.1.1
         imagePullPolicy: Always
         ports:
         - containerPort: 80

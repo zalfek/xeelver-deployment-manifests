@@ -19,7 +19,7 @@ spec:
       serviceAccountName: frontend-server
       containers:
         - name: frontend-server
-          image: marmiss/frontend:1.0.3
+          image: marmiss/frontend:1.0.4
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
