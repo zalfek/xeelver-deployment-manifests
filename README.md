@@ -18,6 +18,7 @@ istioctl install --set components.egressGateways[0].name=istio-egressgateway --s
 
 ```
 kubectl create namespace xeelver
+kubectl create namespace keycloak
 ```
 
 #Enable proxy injection
@@ -31,14 +32,37 @@ kubectl label namespace xeelver istio-injection=enabled
 ```
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.45.0/deploy/static/provider/cloud/deploy.yaml
 kubectl wait --namespace ingress-nginx --for=condition=ready pod --selector=app.kubernetes.io/component=controller --timeout=90s
+
+or for minikube
+
+
+minikube addons enable ingress
 ```
 
 #Configure Gateway(Istio)
 
 ```
-kubectl apply -f
-kubectl apply -f
+kubectl apply -f egress-gateway.yml
+kubectl apply -f external-mysql-svc.yml
+kubectl apply -f ingress-gateway.yml
+kubectl apply -f klarna-egress.yml
 ```
+
+#Deploy secrets
+```
+kubectl apply -f secret\api-secret.yml
+kubectl apply -f secret\cache-secret.yml
+kubectl apply -f secret\keycloak-secret.yml
+kubectl apply -f secret\klarna-secret.yml
+```
+
+#Deploy policy
+```
+kubectl apply -f policy\authorization-policy.yml
+kubectl apply -f policy\peer-authentication.yml
+kubectl apply -f policy\request-authentication.yml
+```
+
 #Deploy Frontend pod and Service
 ```
 kubectl apply -f deployments\frontend-deployment.yml
